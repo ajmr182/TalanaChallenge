@@ -1,4 +1,4 @@
-package com.example.talanachallenge.data.models
+package com.example.talanachallenge.data.models.responses
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

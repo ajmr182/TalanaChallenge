@@ -1,8 +1,6 @@
 package com.example.talanachallenge.ui.dashboard.ui.home
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.talanachallenge.data.models.FeedResponse
 import com.example.talanachallenge.databinding.FragmentHomeBinding
-import com.example.talanachallenge.ui.dashboard.BottomActivity
-import okhttp3.ResponseBody
-import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
