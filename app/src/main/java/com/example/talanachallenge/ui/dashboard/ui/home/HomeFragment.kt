@@ -1,22 +1,26 @@
 package com.example.talanachallenge.ui.dashboard.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.talanachallenge.data.models.FeedResponse
 import com.example.talanachallenge.databinding.FragmentHomeBinding
+import com.example.talanachallenge.ui.dashboard.BottomActivity
+import okhttp3.ResponseBody
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,16 +29,24 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
+            ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+startObservables()
+    }
+
+    fun startObservables() {
+        homeViewModel.requestFeed()
+        homeViewModel.feedResponse.observe(viewLifecycleOwner, Observer {
+            val adapter = HomeAdapter(it)
+            Toast.makeText(requireContext(), "ok", Toast.LENGTH_SHORT).show()
+            binding.feedRecyclerView.setHasFixedSize(true)
+            binding.feedRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.feedRecyclerView.adapter = adapter
         })
-        return root
     }
 
     override fun onDestroyView() {

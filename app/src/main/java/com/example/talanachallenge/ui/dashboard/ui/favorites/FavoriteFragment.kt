@@ -1,4 +1,4 @@
-package com.example.talanachallenge.ui.dashboard.ui.notifications
+package com.example.talanachallenge.ui.dashboard.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.talanachallenge.databinding.FragmentNotificationsBinding
 
-class NotificationsFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -24,14 +24,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        favoriteViewModel =
+            ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        favoriteViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
