@@ -9,12 +9,10 @@ class RetrofitEngine {
 
         fun getRetrofitEngine(): Retrofit {
 
-            val retrofit = Retrofit.Builder()
+            return Retrofit.Builder()
                 .baseUrl("http://192.168.43.132:3100")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-
-            return retrofit
         }
     }
 }

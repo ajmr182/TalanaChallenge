@@ -8,11 +8,11 @@ import com.example.talanachallenge.data.models.entities.FeedEntity
 
 @Database(entities = [FeedEntity::class], version = 1, exportSchema = false)
 
-abstract class FeedDatabase:RoomDatabase() {
+abstract class FeedDatabase : RoomDatabase() {
 
-    abstract fun feedDao():FeedDao
+    abstract fun feedDao(): FeedDao
 
-    companion object{
+    companion object {
 
         @Volatile
         private var INSTANCE: FeedDatabase? = null

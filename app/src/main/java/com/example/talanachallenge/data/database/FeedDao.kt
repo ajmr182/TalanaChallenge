@@ -1,8 +1,10 @@
 package com.example.talanachallenge.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import com.example.talanachallenge.data.models.entities.FeedEntity
 
 @Dao
@@ -13,5 +15,4 @@ interface FeedDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addFavorites(feedEntity: FeedEntity)
-
 }

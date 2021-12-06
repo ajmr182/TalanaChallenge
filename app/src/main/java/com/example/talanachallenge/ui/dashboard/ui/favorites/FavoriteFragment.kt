@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.talanachallenge.databinding.FavoriteFragmentBinding
@@ -20,7 +19,7 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         favoriteViewModel =
             ViewModelProvider(this)[FavoriteViewModel::class.java]
         _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
@@ -29,20 +28,21 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         favoriteViewModel.getAllFavorites()
         initViews()
         startObservables()
     }
 
-    fun initViews() {
+    private fun initViews() {
 
         binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    fun startObservables() {
+    private fun startObservables() {
 
-        favoriteViewModel.readAllData.observe(viewLifecycleOwner, Observer { lista->
-            lista?.let {  binding.rvFavorites.adapter = FavoriteAdapter(it) }
+        favoriteViewModel.readAllData.observe(viewLifecycleOwner, { lista ->
+            lista?.let { binding.rvFavorites.adapter = FavoriteAdapter(it) }
         })
     }
 

@@ -1,5 +1,6 @@
 package com.example.talanachallenge.ui.dashboard.ui.favorites
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +38,12 @@ class FavoriteAdapter(private var favoriteList: List<FeedEntity>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = FavoriteAdapterCustomRowBinding.bind(view)
+
         fun bind(favorite: FeedEntity) {
+
             Picasso.get().load(favorite.image).into(binding.ivPhoto)
             binding.tvTitle.text = favorite.title
-            binding.tvContent.text = favorite.description
+            binding.tvContent.text = Html.fromHtml(favorite.description, Html.FROM_HTML_MODE_LEGACY)
         }
     }
 }

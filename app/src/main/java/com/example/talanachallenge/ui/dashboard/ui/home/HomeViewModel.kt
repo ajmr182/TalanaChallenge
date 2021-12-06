@@ -19,16 +19,19 @@ class HomeViewModel : ViewModel() {
         RetrofitEngine.getRetrofitEngine().create(ApiService::class.java)
             .getFeed()
             .enqueue(object : Callback<List<FeedResponse>> {
+
                 override fun onResponse(
                     call: Call<List<FeedResponse>>,
                     response: Response<List<FeedResponse>>
                 ) {
                     if (response.isSuccessful) {
+
                         feedResponse.postValue(response)
                     }
                 }
 
                 override fun onFailure(call: Call<List<FeedResponse>>, t: Throwable) {
+
                     t.message?.let { Log.e("Error en Servidor", it) }
                 }
             })

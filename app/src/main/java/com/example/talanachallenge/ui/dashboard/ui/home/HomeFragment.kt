@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.talanachallenge.databinding.FragmentHomeBinding
@@ -21,7 +20,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -29,12 +29,14 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-startObservables()
+
+        startObservables()
     }
 
-    fun startObservables() {
+    private fun startObservables() {
+
         homeViewModel.requestFeed()
-        homeViewModel.feedResponse.observe(viewLifecycleOwner, Observer {
+        homeViewModel.feedResponse.observe(viewLifecycleOwner,  {
             val adapter = HomeAdapter(it)
             Toast.makeText(requireContext(), "ok", Toast.LENGTH_SHORT).show()
             binding.feedRecyclerView.setHasFixedSize(true)
@@ -44,6 +46,7 @@ startObservables()
     }
 
     override fun onDestroyView() {
+
         super.onDestroyView()
         _binding = null
     }

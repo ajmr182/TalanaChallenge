@@ -1,5 +1,6 @@
 package com.example.talanachallenge.ui.dashboard.ui.home
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +16,22 @@ class HomeAdapter(private var information: Response<List<FeedResponse>>) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(layoutInflater.inflate(R.layout.home_adapter_custom_row, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val notification = information.body()?.get(position)
         if (notification != null) {
+
             holder.bind(notification)
         }
     }
 
     override fun getItemCount(): Int {
+
         return information.body()!!.size
     }
 
@@ -35,14 +40,17 @@ class HomeAdapter(private var information: Response<List<FeedResponse>>) :
         private val binding = HomeAdapterCustomRowBinding.bind(view)
 
         fun bind(notification: FeedResponse) {
+
             Picasso.get().load(notification.image).into(binding.ivPhoto)
             binding.tvTitle.text = notification.title
-            binding.tvContent.text = notification.description
+            binding.tvContent.text =
+                Html.fromHtml(notification.description, Html.FROM_HTML_MODE_LEGACY)
             binding.cardViewHome.setOnClickListener {
 
-                val action = HomeFragmentDirections.actionNavigationHomeToDescriptionFragment(notification)
+                val action =
+                    HomeFragmentDirections.actionNavigationHomeToDescriptionFragment(notification)
                 itemView.findNavController().navigate(action)
             }
         }
-   }
+    }
 }

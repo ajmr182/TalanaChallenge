@@ -17,7 +17,7 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
 
         val feedDao = FeedDatabase.getDatabase(application).feedDao()
         repository = FeedRepository(feedDao)
-        readAllData=repository.readAllData
+        readAllData = repository.readAllData
     }
 
     fun getAllFavorites() {

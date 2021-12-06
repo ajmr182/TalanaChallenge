@@ -1,9 +1,10 @@
-package com.example.talanachallenge.data.database
+package com.example.talanachallenge.ui.dashboard.ui.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.talanachallenge.data.database.FeedDatabase
+import com.example.talanachallenge.data.database.FeedRepository
 import com.example.talanachallenge.data.models.entities.FeedEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,7 +12,6 @@ import kotlinx.coroutines.launch
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: FeedRepository
-    lateinit var readAllData: LiveData<List<FeedEntity>>
 
     init {
 
