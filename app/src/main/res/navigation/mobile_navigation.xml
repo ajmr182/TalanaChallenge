@@ -19,17 +19,17 @@
         android:id="@+id/navigation_notifications"
         android:name="com.example.talanachallenge.ui.dashboard.ui.favorites.FavoriteFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/favorite_fragment" />
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.talanachallenge.ui.dashboard.ui.home.DescriptionFragment"
-        android:label="fragment_description"
+        android:label="Description"
         tools:layout="@layout/fragment_description" >
         <action
             android:id="@+id/action_descriptionFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
         <argument
             android:name="currentItem"
-            app:argType="com.example.talanachallenge.data.models.FeedResponse" />
+            app:argType="com.example.talanachallenge.data.models.responses.FeedResponse" />
     </fragment>
 </navigation>

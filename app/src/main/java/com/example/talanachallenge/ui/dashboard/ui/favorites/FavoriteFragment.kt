@@ -4,19 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.talanachallenge.databinding.FragmentNotificationsBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.talanachallenge.databinding.FavoriteFragmentBinding
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var favoriteViewModel: FavoriteViewModel
-    private var _binding: FragmentNotificationsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FavoriteFragmentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,16 +22,28 @@ class FavoriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         favoriteViewModel =
-            ViewModelProvider(this).get(FavoriteViewModel::class.java)
+            ViewModelProvider(this)[FavoriteViewModel::class.java]
+        _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        favoriteViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        favoriteViewModel.getAllFavorites()
+        initViews()
+        startObservables()
+    }
+
+    fun initViews() {
+
+        binding.rvFavorites.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    fun startObservables() {
+
+        favoriteViewModel.readAllData.observe(viewLifecycleOwner, Observer { lista->
+            lista?.let {  binding.rvFavorites.adapter = FavoriteAdapter(it) }
         })
-        return root
     }
 
     override fun onDestroyView() {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.talanachallenge.R
-import com.example.talanachallenge.data.models.FeedResponse
+import com.example.talanachallenge.data.models.responses.FeedResponse
 import com.example.talanachallenge.databinding.HomeAdapterCustomRowBinding
 import com.squareup.picasso.Picasso
 import retrofit2.Response

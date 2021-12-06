@@ -1,11 +1,9 @@
 package com.example.talanachallenge.ui.dashboard.ui.home
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.talanachallenge.data.models.FeedResponse
-import com.example.talanachallenge.data.models.Login
+import com.example.talanachallenge.data.models.responses.FeedResponse
 import com.example.talanachallenge.network.ApiService
 import com.example.talanachallenge.network.RetrofitEngine
 import retrofit2.Call
